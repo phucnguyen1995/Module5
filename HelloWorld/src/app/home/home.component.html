@@ -1,0 +1,71 @@
+<!--<h1>Hello Angular!</h1>-->
+<!--<h3>Chào anh {{name}} </h3>-->
+<!--<h3>Bạn đã {{age}} tuổi</h3>-->
+<!--&lt;!&ndash;<span class="myfirstcss">Hihihihih</span>&ndash;&gt;-->
+
+<!--<span *ngIf="age<18">Bạn dưới 18 tuổi</span>-->
+<!--<br />-->
+<!--<span *ngIf="age>=18">Bạn trên 18 tuổi,bạn quá già</span>-->
+<!--<br />-->
+<!--Danh sách xe :-->
+<!--<br />-->
+
+<!--<div *ngFor="let ve of vehicles">-->
+<!--<li>{{ ve }}</li>-->
+<!--</div>-->
+
+<!--<br />-->
+
+<!--<div>-->
+<!--  <select>-->
+<!--  <option *ngFor="let ve of vehicles">{{ ve }}</option>-->
+<!--  </select>-->
+<!--</div>-->
+
+<!--<br />-->
+
+<!--<input />-->
+
+<!--<br /><br />-->
+
+<!--<input [(ngModel)]="name"/>-->
+<!--&lt;!&ndash;qua ben kia khai bao&ndash;&gt;-->
+<!--&lt;!&ndash;chỉ cần bấm ngm  rồi qua app.module.ts&ndash;&gt;-->
+
+<!--<br /><br />-->
+<!--<button (click)="tangTuoi()"> Tăng </button>-->
+<!--&lt;!&ndash;qua ben kia khai bao&ndash;&gt;-->
+<!--&lt;!&ndash;home.component.ts&ndash;&gt;-->
+
+
+
+<br /><br />
+<br /><br />
+<br /><br />
+
+<!--cach khac cua if/else-->
+<span *ngIf="age<18;then condition1;else condition2"></span>
+<br /><br />
+<ng-template #condition1>Bạn dưới 18 tuôi</ng-template>
+<br /><br />
+<ng-template #condition2>Bạn bằng hoặc trên 18 tuôi</ng-template>
+<br /><br />
+<button (click)="tangTuoi()"> Tăng </button>
+
+<br /><br />
+<br /><br />
+<br /><br />
+
+<!--///////////////////////////////////////-->
+
+<h3>Chào anh {{name | uppercase}} </h3>
+<!--biên thanh chữ hoa-->
+<h3>Bạn đã {{age | number:"1.0-2"}} tuổi</h3>
+<!--Tuổi thêm 2 số phía sau-->
+<span>{{vehicles|json}}</span>
+<!--ket qua: [ "Toyota", "Honda", "Mitsubishi" ]-->
+
+<h3>Bạn đã {{age | number:"1.0-2"| currency}} tuổi</h3>
+<!--hienn ra đô-->
+
+<!--////////////////////////////////////-->
