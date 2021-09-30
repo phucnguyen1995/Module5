@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create</title>
+    <link rel="stylesheet" type="text/css" href="/bootstrap4/css/bootstrap.css">
+
+</head>
+<body>
+
+<!--<header class="container-fluid bg-light d-flex sticky-top">-->
+<!--    <div class="col-lg-10">-->
+<!--        <img width="60px" height="60px" src="/image/furamalogo.png">-->
+<!--    </div>-->
+<!--    <div class="col-lg-2 d-flex justify-content-end">-->
+<!--        <p style="margin-top: 14px;color: #005cbf">HELLO!</p>-->
+<!--    </div>-->
+<!--</header>-->
+
+<header th:replace="homePage :: header"></header>
+
+
+<div th:replace="homePage :: cana"></div>
+
+<div class="container-fluid bg-light border ">
+    <div class="container">
+
+        <form th:object="${contractDetailDto}" action="/contractDetail/create" method="post">
+            <div class="alert alert-info m-5" role="alert">
+                <h4 class="alert-heading">Please enter the information !</h4>
+
+                <hr>
+
+
+<!--                <td th:text="${contractDetail.contractDetailId}"></td>-->
+<!--                <td th:text="${contractDetail.quantity}"></td>-->
+<!--                <td th:text="${contractDetail.contract}"></td>-->
+<!--                <td th:text="${contractDetail.attachService.attachServiceName}"></td>-->
+
+
+                <label class="col-md-4 control-label ">Quantity:</label>
+                <div class="input-group mb-2">
+                    <input type="text" th:field="*{quantity}" class="form-control"/>
+                </div>
+                <div th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}"
+                     style="color: red">Error
+                </div>
+
+
+
+
+                <label class="col-md-4 control-label ">Contract Id:</label>
+                <div class="input-group mb-2">
+                    <select class="form-control" th:field="*{contract}">
+                        <option th:each="item : ${contractList}" th:value="${item.contractId}"
+                                th:text="${item.contractId}">
+                        </option>
+                    </select>
+                </div>
+
+
+
+                <label class="col-md-4 control-label ">Name Attach Service:</label>
+                <div class="input-group mb-2">
+                    <select class="form-control" th:field="*{attachService}">
+                        <option th:each="item : ${attachServiceList}" th:value="${item.attachServiceId}"
+                                th:text="${item.attachServiceName}">
+                        </option>
+                    </select>
+                </div>
+
+                <hr>
+
+                <div>
+                    <div style=" display:inline-block;margin-left: 550px">
+                        <button type="submit" class="btn btn-primary">Create</button>
+                    </div>
+
+                    <div style=" display:inline-block">
+                        <a th:href="@{/contractDetail}">
+                            <button type="button" class="btn btn-primary">Cancel</button>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<footer th:replace="homePage :: end"></footer>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

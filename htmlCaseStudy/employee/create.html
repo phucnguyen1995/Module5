@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create</title>
+    <link rel="stylesheet" type="text/css" href="/bootstrap4/css/bootstrap.css">
+
+</head>
+<body>
+
+<!--<header class="container-fluid bg-light d-flex sticky-top">-->
+<!--    <div class="col-lg-10">-->
+<!--        <img width="60px" height="60px" src="/image/furamalogo.png">-->
+<!--    </div>-->
+<!--    <div class="col-lg-2 d-flex justify-content-end">-->
+<!--        <p style="margin-top: 14px;color: #005cbf">HELLO!</p>-->
+<!--    </div>-->
+<!--</header>-->
+
+<header th:replace="homePage :: header"></header>
+
+
+<div th:replace="homePage :: cana"></div>
+
+<div class="container-fluid bg-light border ">
+    <div class="container">
+        <!--        //-->
+        <form th:object="${employeeDto}" action="/employee/create" method="post">
+            <div class="alert alert-info m-5" role="alert">
+                <h4 class="alert-heading">Please enter the information !</h4>
+
+                <hr>
+
+
+                <label class="col-md-4 control-label ">Name:</label>
+                <div class="input-group mb-2">
+                    <input type="text" th:field="*{employeeName}" class="form-control"/>
+                </div>
+                <div th:if="${#fields.hasErrors('employeeName')}" th:errors="*{employeeName}"
+                     style="color: red">Error
+                </div>
+
+
+                <label class="col-md-4 control-label ">Birthday:</label>
+                <div class="input-group mb-2">
+                    <input type="date" th:field="*{employeeBirthday}" class="form-control"/>
+                </div>
+                <div th:if="${#fields.hasErrors('employeeBirthday')}" th:errors="*{employeeBirthday}"
+                     style="color: red">Error
+                </div>
+
+                <label class="col-md-4 control-label ">IdCard</label>
+                <div class="input-group mb-2">
+                    <input type="text" th:field="*{employeeIdCard}" class="form-control"/>
+                </div>
+                <div th:if="${#fields.hasErrors('employeeIdCard')}" th:errors="*{employeeIdCard}"
+                     style="color: red">Error
+                </div>
+
+
+                <label class="col-md-4 control-label ">Salary</label>
+                <div class="input-group mb-2">
+                    <input type="text" th:field="*{employeeSalary}" class="form-control"/>
+                </div>
+                <div th:if="${#fields.hasErrors('employeeSalary')}" th:errors="*{employeeSalary}"
+                     style="color: red">Error
+                </div>
+
+                <label class="col-md-4 control-label ">Phone</label>
+                <div class="input-group mb-2">
+                    <input type="text" th:field="*{employeePhone}" class="form-control"/>
+                </div>
+                <div th:if="${#fields.hasErrors('employeePhone')}" th:errors="*{employeePhone}"
+                     style="color: red">Error
+                </div>
+
+                <label class="col-md-4 control-label ">Email</label>
+                <div class="input-group mb-2">
+                    <input type="text" th:field="*{employeeEmail}" class="form-control"/>
+                </div>
+                <div th:if="${#fields.hasErrors('employeeEmail')}" th:errors="*{employeeEmail}"
+                     style="color: red">Error
+                </div>
+
+                <label class="col-md-4 control-label ">Address</label>
+                <div class="input-group mb-2">
+                    <input type="text" th:field="*{employeeAddress}" class="form-control"/>
+                </div>
+                <div th:if="${#fields.hasErrors('employeeAddress')}" th:errors="*{employeeAddress}"
+                     style="color: red">Error
+                </div>
+
+
+                <label class="col-md-4 control-label ">Division:</label>
+                <div class="input-group mb-2">
+                    <select class="form-control" th:field="*{division}">
+                        <option th:each="item : ${divisionList}" th:value="${item.divisionId}"
+                                th:text="${item.divisionName}">
+                        </option>
+                    </select>
+                </div>
+
+                <label class="col-md-4 control-label ">Education:</label>
+                <div class="input-group mb-2">
+                    <select class="form-control" th:field="*{education}">
+                        <option th:each="item : ${educationList}" th:value="${item.educationDegreeId}"
+                                th:text="${item.educationDegreeName}">
+                        </option>
+                    </select>
+                </div>
+
+                <label class="col-md-4 control-label ">Position:</label>
+                <div class="input-group mb-2">
+                    <select class="form-control" th:field="*{position}">
+                        <option th:each="item : ${positionList}" th:value="${item.positionId}"
+                                th:text="${item.positionName}">
+                        </option>
+                    </select>
+                </div>
+
+
+                <hr>
+
+                <div>
+                    <div style=" display:inline-block;margin-left: 550px">
+                        <button type="submit" class="btn btn-primary">Create</button>
+                    </div>
+
+                    <div style=" display:inline-block">
+                        <a th:href="@{/employee}">
+                            <button type="button" class="btn btn-primary">Cancel</button>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<footer th:replace="homePage :: end"></footer>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

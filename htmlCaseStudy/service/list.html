@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List</title>
+    <link rel="stylesheet" type="text/css" href="/bootstrap4/css/bootstrap.css">
+
+</head>
+<body>
+
+<!--<header class="container-fluid bg-light d-flex sticky-top">-->
+<!--    <div class="col-lg-10">-->
+<!--        <img width="60px" height="60px" src="/image/furamalogo.png">-->
+<!--    </div>-->
+<!--    <div class="col-lg-2 d-flex justify-content-end">-->
+<!--        <p style="margin-top: 14px;color: #005cbf">HELLO!</p>-->
+<!--    </div>-->
+<!--</header>-->
+
+<header th:replace="homePage :: header"></header>
+
+<div th:replace="homePage :: cana"></div>
+
+<div class="container-fluid bg-light border ">
+    <div class="row">
+
+        <div class="col-lg-12 pt-3 pb-3">
+            <div class="row" style="margin-bottom: 10px">
+
+                <div class="col-lg-12">
+                    <h1 th:align="center">List</h1>
+                </div>
+
+                <div class="col-lg-8">
+
+                    <div style=" display:inline-block;width:50%;float: left ; margin-left: 110px;" ;>
+                        <a th:href="@{/service/create}">
+                            <button type="button" class="btn btn-success">Add Create</button>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div style=" display:inline-block">
+                        <form action="/service" class="form-inline my-2 my-lg-0">
+                            <input class="form-control mr-sm-2" type="search" placeholder="serviceName"
+                                   aria-label="Search" name="name">
+                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="col-lg-12">
+                    <div th:align="center">
+                        <span th:if="${message}" th:text="${message}" style="color: red"></span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <table class="table table-striped">
+                    <thead>
+                    <!--                    <tr class="alert alert-primary" role="alert">-->
+                    <tr class="table-success">
+
+                        <th scope="col">Id</th>
+                        <th scope="col">Code</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Area</th>
+                        <th scope="col">Cost</th>
+                        <th scope="col">Max People</th>
+                        <th scope="col">standard Room</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Pool Area</th>
+                        <th scope="col">Number Of Floor</th>
+                        <th scope="col">Rent Type</th>
+                        <th scope="col">Service Type</th>
+
+
+                        <th scope="col">Delete</th>
+
+
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr th:each="service: ${services}">
+
+                        <td th:text="${service.serviceId}"></td>
+
+                        <td th:text="${service.serviceCode}"></td>
+
+                        <td th:text="${service.serviceName}"></td>
+
+                        <td th:text="${service.serviceArea}"></td>
+
+
+                        <td th:text="${service.serviceCost}"></td>
+                        <td th:text="${service.serviceMaxPeople}"></td>
+                        <td th:text="${service.standardRoom}"></td>
+                        <td th:text="${service.descriptionOtherConvenience}"></td>
+
+                        <td th:text="${service.poolArea}"></td>
+                        <td th:text="${service.numberOfFloor}"></td>
+
+
+                        <td th:text="${service.rentType.rentTypeName}"></td>
+                        <td th:text="${service.serviceType.serviceTypeName}"></td>
+
+                        <td>
+                            <button class="btn btn-danger" data-toggle="modal" data-target="#myModal"
+                                    th:data-parameter1="${service.serviceId}"
+                                    th:data-parameter2="${service.serviceName}"
+                                    onclick="showModal(this.getAttribute('data-parameter1'),this.getAttribute('data-parameter2'))">
+                                Delete
+                            </button>
+
+                        </td>
+
+
+                    </tr>
+
+                    </tbody>
+                </table>
+
+
+                <div>
+                    <a th:href="@{'/service'(page=${services.number - 1},name=${searchName})}"
+                       th:if="${services.hasPrevious()}">Previous</a>
+
+                    <span th:text="${services.number+1}"></span>/<span th:text="${services.totalPages}"></span>
+
+                    <a th:href="@{'/service'(page=${services.number + 1},name=${searchName})}"
+                       th:if="${services.hasNext()}">Next</a>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+<!--sTART MODAL-->
+
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <!--        -->
+        <form th:action="@{/service/delete}" method="post">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="myModalLabel">Accept delete </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Do you want to delete
+                    <span style="color: red" id="serviceName"></span>?
+                </div>
+                <div class="modal-footer">
+                    <input type="button" class="btn btn-secondary" data-dismiss="modal" value="Cancel">
+                    <input type="submit" class="btn btn-danger btn-ok" id="delete" value="Delete">
+                    <!---->
+                    <input type="hidden" id="serviceId" name="id">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function showModal(id, name) {
+        document.getElementById("serviceId").value = id;
+        document.getElementById("serviceName").innerText = name;
+    }
+</script>
+
+<!--END MODAL-->
+
+<footer th:replace="homePage :: end"></footer>
+
+</body>
+</html>
+
+

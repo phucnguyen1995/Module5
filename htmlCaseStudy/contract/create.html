@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create</title>
+    <link rel="stylesheet" type="text/css" href="/bootstrap4/css/bootstrap.css">
+
+</head>
+<body>
+
+<!--<header class="container-fluid bg-light d-flex sticky-top">-->
+<!--    <div class="col-lg-10">-->
+<!--        <img width="60px" height="60px" src="/image/furamalogo.png">-->
+<!--    </div>-->
+<!--    <div class="col-lg-2 d-flex justify-content-end">-->
+<!--        <p style="margin-top: 14px;color: #005cbf">HELLO!</p>-->
+<!--    </div>-->
+<!--</header>-->
+
+<header th:replace="homePage :: header"></header>
+<div th:replace="homePage :: cana"></div>
+
+<div class="container-fluid bg-light border ">
+    <div class="container">
+
+        <form th:object="${contractDto}" action="/contract/create" method="post">
+            <div class="alert alert-info m-5" role="alert">
+                <h4 class="alert-heading">Please enter the information !</h4>
+
+                <hr>
+
+
+                <label class="col-md-4 control-label ">contractStartDate:</label>
+                <div class="input-group mb-2">
+                    <input type="date" th:field="*{contractStartDate}" class="form-control"/>
+                </div>
+                <div th:if="${#fields.hasErrors('contractStartDate')}" th:errors="*{contractStartDate}"
+                     style="color: red">Error
+                </div>
+
+
+                <label class="col-md-4 control-label ">contractEndDate:</label>
+                <div class="input-group mb-2">
+                    <input type="date" th:field="*{contractEndDate}" class="form-control"/>
+                </div>
+                <div th:if="${#fields.hasErrors('contractEndDate')}" th:errors="*{contractEndDate}"
+                     style="color: red">Error
+                </div>
+
+                <label class="col-md-4 control-label ">contractDeposit</label>
+                <div class="input-group mb-2">
+                    <input type="text" th:field="*{contractDeposit}" class="form-control"/>
+                </div>
+                <div th:if="${#fields.hasErrors('contractDeposit')}" th:errors="*{contractDeposit}"
+                     style="color: red">Error
+                </div>
+
+
+                <label class="col-md-4 control-label ">contractTotalMoney:</label>
+                <div class="input-group mb-2">
+                    <input type="text" th:field="*{contractTotalMoney}" class="form-control"/>
+                </div>
+                <div th:if="${#fields.hasErrors('contractTotalMoney')}" th:errors="*{contractTotalMoney}"
+                     style="color: red">Error
+                </div>
+
+
+                <label class="col-md-4 control-label ">Customer Name:</label>
+                <div class="input-group mb-2">
+                    <select class="form-control" th:field="*{customer}">
+                        <option th:each="item : ${customerList}" th:value="${item.customerId}"
+                                th:text="${item.customerName}">
+                        </option>
+                    </select>
+                </div>
+
+
+                <label class="col-md-4 control-label ">Employee Name:</label>
+                <div class="input-group mb-2">
+                    <select class="form-control" th:field="*{employee}">
+                        <option th:each="item : ${employeeList}" th:value="${item.employeeId}"
+                                th:text="${item.employeeName}">
+                        </option>
+                    </select>
+                </div>
+
+
+                <label class="col-md-4 control-label ">Service Name:</label>
+                <div class="input-group mb-2">
+                    <select class="form-control" th:field="*{service}">
+                        <option th:each="item : ${serviceList}" th:value="${item.serviceId}"
+                                th:text="${item.serviceName}">
+                        </option>
+                    </select>
+                </div>
+
+
+                <hr>
+
+                <div>
+                    <div style=" display:inline-block;margin-left: 550px">
+                        <button type="submit" class="btn btn-primary">Create</button>
+                    </div>
+
+                    <div style=" display:inline-block">
+                        <a th:href="@{/service}">
+                            <button type="button" class="btn btn-primary">Cancel</button>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<footer th:replace="homePage :: end"></footer>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

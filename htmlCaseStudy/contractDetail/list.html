@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List</title>
+    <link rel="stylesheet" type="text/css" href="/bootstrap4/css/bootstrap.css">
+
+</head>
+<body>
+
+<!--<header class="container-fluid bg-light d-flex sticky-top">-->
+<!--    <div class="col-lg-10">-->
+<!--        <img width="60px" height="60px" src="/image/furamalogo.png">-->
+<!--    </div>-->
+<!--    <div class="col-lg-2 d-flex justify-content-end">-->
+<!--        <p style="margin-top: 14px;color: #005cbf">HELLO!</p>-->
+<!--    </div>-->
+<!--</header>-->
+
+<header th:replace="homePage :: header"></header>
+
+<div th:replace="homePage :: cana"></div>
+
+<div class="container-fluid bg-light border ">
+    <div class="row">
+
+        <div class="col-lg-12 pt-3 pb-3">
+            <div class="row" style="margin-bottom: 10px">
+
+                <div class="col-lg-12">
+                    <h1 th:align="center">List</h1>
+                </div>
+
+                <div class="col-lg-12">
+                    <div style=" display:inline-block;width:50%;float: left ; margin-left: 110px;" ;>
+                        <a th:href="@{/contractDetail/create}">
+                            <button type="button" class="btn btn-success">Add Create</button>
+                        </a>
+                    </div>
+                </div>
+
+                <!--                <div class="col-lg-4">-->
+                <!--                    <div style=" display:inline-block">-->
+                <!--                        <form action="/service" class="form-inline my-2 my-lg-0">-->
+                <!--                            <input class="form-control mr-sm-2" type="search" placeholder="serviceName"-->
+                <!--                                   aria-label="Search" name="name">-->
+                <!--                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
+                <!--                        </form>-->
+                <!--                    </div>-->
+                <!--                </div>-->
+
+                <div class="col-lg-12">
+                    <div th:align="center">
+                        <span th:if="${message}" th:text="${message}" style="color: red"></span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <table class="table table-striped container ">
+                    <thead>
+                    <!--                    <tr class="alert alert-primary " role="alert">-->
+                    <tr class="table-success">
+                        <th scope="col">Id</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Contract Id</th>
+                        <th scope="col">Name Attach Service</th>
+                        <th scope="col">Status Attach Service</th>
+
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr th:each="contractDetail: ${contractDetails}">
+
+                        <td th:text="${contractDetail.contractDetailId}"></td>
+                        <td th:text="${contractDetail.quantity}"></td>
+                        <td th:text="${contractDetail.contract.contractId}"></td>
+                        <td th:text="${contractDetail.attachService.attachServiceName}"></td>
+                        <td th:text="${contractDetail.attachService.attachServiceStatus}"></td>
+
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+
+            <div>
+                <a th:href="@{'/contractDetail'(page=${contractDetails.number - 1})}"
+                   th:if="${contractDetails.hasPrevious()}">Previous</a>
+
+                <span th:text="${contractDetails.number+1}"></span>/<span
+                    th:text="${contractDetails.totalPages}"></span>
+
+                <a th:href="@{'/contractDetail'(page=${contractDetails.number + 1})}"
+                   th:if="${contractDetails.hasNext()}">Next</a>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+</div>
+
+
+<footer th:replace="homePage :: end"></footer>
+
+</body>
+</html>
+
+

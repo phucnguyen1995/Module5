@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List</title>
+    <link rel="stylesheet" type="text/css" href="/bootstrap4/css/bootstrap.css">
+
+</head>
+<body>
+
+<!--<header class="container-fluid bg-light d-flex sticky-top">-->
+<!--    <div class="col-lg-10">-->
+<!--        <img width="60px" height="60px" src="/image/furamalogo.png">-->
+<!--    </div>-->
+<!--    <div class="col-lg-2 d-flex justify-content-end">-->
+<!--        <p style="margin-top: 14px;color: #005cbf">HELLO!</p>-->
+<!--    </div>-->
+<!--</header>-->
+
+<header th:replace="homePage :: header"></header>
+
+<div th:replace="homePage :: cana"></div>
+
+<div class="container-fluid bg-light border ">
+    <div class="row">
+
+        <div class="col-lg-12 pt-3 pb-3">
+            <div class="row" style="margin-bottom: 10px">
+
+                <div class="col-lg-12">
+                    <h1 th:align="center">List</h1>
+                </div>
+
+                <div class="col-lg-7">
+
+                    <div style=" display:inline-block;width:50%;float: left ; margin-left: 110px;" ;>
+                        <a th:href="@{/customer/create}">
+                            <button type="button" class="btn btn-success">Add Create</button>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-5">
+                    <div style=" display:inline-block">
+                        <form action="/customer" class="form-inline my-2 my-lg-0">
+                            <input th:value="${searchName}" class="form-control mr-sm-2" type="search"
+                                   placeholder="customerName" aria-label="Search" name="name">
+
+
+                            <select class="form-control mr-sm-2" name="typeCustomer">
+                                <option selected disabled value="">searchTypeCustomer</option>
+                                <option value="Diamond">Diamond</option>
+                                <option value="Platinum">Platinum</option>
+                                <option value="Gold">Gold</option>
+                                <option value="Silver">Silver</option>
+                                <option value="Member">Member</option>
+                            </select>
+
+
+                            <select class="form-control mr-sm-2" name="typeCustomer">
+                                <option selected value="">All position</option>
+                                <th:block th:each="p : ${customerList}">
+                                    <option th:value="${p.customerTypeName}" th:text="${p.customerTypeName}"
+                                            th:selected=" ${p.customerTypeName} == ${typeName}">
+                                    </option>
+                                </th:block>
+                            </select>
+
+
+<!--                            <input class="form-control mr-sm-2" type="search" placeholder="typeCustomer"-->
+<!--                                   aria-label="Search" name="typeCustomer">-->
+
+
+                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="col-lg-12">
+                    <div th:align="center">
+                        <span th:if="${message}" th:text="${message}" style="color: red"></span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <table class="table table-striped">
+                    <thead>
+                    <!--                    <tr class="alert alert-primary" role="alert">-->
+
+
+                    <!--                        <div class="table-responsive">-->
+                    <!--                            <table class="table table-bordered table-hover">-->
+                    <!--                                <thead>-->
+                    <tr class="table-success">
+
+
+                        <th scope="col">Id</th>
+                        <th scope="col">Code</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Birthday</th>
+                        <th scope="col">Gender</th>
+                        <th scope="col">IdCard</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Address</th>
+
+                        <th scope="col">Edit</th>
+                        <th scope="col">Delete</th>
+                        <th scope="col">View</th>
+
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr th:each="customer: ${customers}">
+
+                        <td th:text="${customer.customerId}"></td>
+
+                        <td th:text="${customer.customerCode}"></td>
+
+                        <td th:text="${customer.customerType.customerTypeName}"></td>
+
+                        <td th:text="${customer.customerName}"></td>
+
+                        <td th:text="${customer.customerBirthday}"></td>
+
+                        <td>
+                            <p th:if="${customer.customerGender}==1">Male</p>
+                            <p th:if="${customer.customerGender}==2">Female</p>
+                            <p th:if="${customer.customerGender}==3">LGBT</p>
+                        </td>
+
+                        <td th:text="${customer.customerIdCard}"></td>
+                        <td th:text="${customer.customerPhone}"></td>
+                        <td th:text="${customer.customerEmail}"></td>
+                        <td th:text="${customer.customerAddress}"></td>
+
+                        <td>
+                            <a th:href="@{/customer/edit/__${customer.customerId}__}">
+                                <button type="button" class="btn btn-primary">Edit</button>
+                            </a>
+                        </td>
+
+                        <td>
+                            <button class="btn btn-danger" data-toggle="modal" data-target="#myModal"
+                                    th:data-parameter1="${customer.customerId}"
+                                    th:data-parameter2="${customer.customerName}"
+                                    onclick="showModal(this.getAttribute('data-parameter1'),this.getAttribute('data-parameter2'))">
+                                Delete
+                            </button>
+                        </td>
+
+                        <td>
+                            <a th:href="@{/customer/view/__${customer.customerId}__}">
+                                <button type="button" class="btn btn-primary">View</button>
+                            </a>
+                        </td>
+
+                    </tr>
+
+                    </tbody>
+                </table>
+
+
+                <div>
+                    <a th:href="@{'/customer'(page=${customers.number - 1},name=${searchName},typeCustomer=${typeName})}"
+                       th:if="${customers.hasPrevious()}">Previous</a>
+
+                    <span th:text="${customers.number+1}"></span>/<span th:text="${customers.totalPages}"></span>
+
+                    <a th:href="@{'/customer'(page=${customers.number + 1},name=${searchName},typeCustomer=${typeName})}"
+                       th:if="${customers.hasNext()}">Next</a>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+<!--sTART MODAL-->
+
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <!--        -->
+        <form th:action="@{/customer/delete}" method="post">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="myModalLabel">Accept delete </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Do you want to delete
+                    <span style="color: red" id="customerName"></span>?
+                </div>
+                <div class="modal-footer">
+                    <input type="button" class="btn btn-secondary" data-dismiss="modal" value="Cancel">
+                    <input type="submit" class="btn btn-danger btn-ok" id="delete" value="Delete">
+                    <!---->
+                    <input type="hidden" id="customerId" name="id">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function showModal(id, name) {
+        document.getElementById("customerId").value = id;
+        document.getElementById("customerName").innerText = name;
+    }
+</script>
+
+<!--END MODAL-->
+
+<footer th:replace="homePage :: end"></footer>
+
+</body>
+</html>
+
+
