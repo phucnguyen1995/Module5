@@ -1,0 +1,84 @@
+<div class="container">
+  <div class="row">
+
+<div class="col-6">
+
+
+  <div class="col-6"></div>
+  <div class="card" style="width: 30rem;">
+    <div class="card-body">
+      <h5 class="card-title">Student List</h5>
+
+
+      <table class="table table-striped">
+
+        <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Gender</th>
+          <th scope="col">Point</th>
+          <th>Result</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of students,let i=index" (click)="showDetail(item)">
+
+          <td>{{i + 1}}</td>
+
+          <td [ngClass]="item.name =='VIP'? 'txt-color':''">
+
+            <!--                          <td [ngClass]="item.name =='VIP'? 'txt-color,  txt-font-weight':''">-->
+
+
+            {{item.name}}</td>
+
+
+          <td [ngSwitch]="item.gender">
+            <span *ngSwitchCase="0">Male</span>
+            <span *ngSwitchCase="1">Female</span>
+            <span *ngSwitchDefault>LGBT</span>
+
+          </td>
+
+
+          <!--            <td>{{item.point}}</td>-->
+          <td [ngStyle]="{'color':item.point==0?'red':'',
+                       'font-weight':item.point==0?'bold':''}">
+            {{item.point}}
+          </td>
+
+
+          <td>
+            <span *ngIf="item.point>=75; else elseBlock">Pass</span>
+            <ng-template #elseBlock>Fail</ng-template>
+          </td>
+
+        </tr>
+
+
+        </tbody>
+      </table>
+
+
+    </div>
+  </div>
+
+
+
+
+
+</div>
+
+    <div class="col-6">
+      <app-student-detail [studentChild]="studentParent"></app-student-detail>
+      <br />
+      <app-student-create (studentCreateOne)="getNewStudent($event)" ></app-student-create>
+    </div>
+
+
+
+
+  </div>
+
+</div>
