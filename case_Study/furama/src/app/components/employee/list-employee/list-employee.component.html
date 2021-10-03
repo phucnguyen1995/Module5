@@ -1,0 +1,193 @@
+<header th:replace="homePage :: header"></header>
+<div th:replace="homePage :: cana"></div>
+
+<div class="container-fluid bg-light border ">
+  <div class="row">
+
+    <div class="col-lg-12 pt-3 pb-3">
+      <div class="row" style="margin-bottom: 10px">
+
+        <div class="col-lg-12">
+          <h1 th:align="center">List</h1>
+        </div>
+
+        <div class="col-lg-8">
+
+          <div style=" display:inline-block;width:50%;float: left ; margin-left: 110px;" ;>
+            <!--                        -->
+            <a th:href="@{/employee/create}">
+              <button type="button" class="btn btn-success">Add Create</button>
+            </a>
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <div style=" display:inline-block">
+            <!--                        -->
+            <form action="/employee" class="form-inline my-2 my-lg-0">
+              <input class="form-control mr-sm-2" type="search" placeholder="employeeName"
+                     aria-label="Search" name="name">
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+          </div>
+        </div>
+
+        <div class="col-lg-12">
+          <div th:align="center">
+            <span th:if="${message}" th:text="${message}" style="color: red"></span>
+          </div>
+        </div>
+
+      </div>
+
+
+
+
+
+
+      <div class="row">
+        <table class="table table-striped ">
+          <thead>
+          <!--                    <tr class="alert alert-primary" role="alert">-->
+          <tr class="table-success">
+            <th scope="col">Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Birthday</th>
+            <th scope="col">IdCard</th>
+            <th scope="col">Salary</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Email</th>
+            <th scope="col">Address</th>
+
+            <th scope="col">Position</th>
+            <th scope="col">Education</th>
+            <th scope="col">Division</th>
+
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+            <th scope="col">View</th>
+
+          </tr>
+          </thead>
+
+
+
+
+          <tbody>
+          <tr th:each="employee: ${employees}">
+
+            <td th:text="${employee.employeeId}"></td>
+            <td th:text="${employee.employeeName}"></td>
+            <td th:data="${employee.employeeBirthday}"></td>
+            <td th:text="${employee.employeeIdCard}"></td>
+            <td th:text="${employee.employeeSalary}"></td>
+            <td th:text="${employee.employeePhone}"></td>
+            <td th:text="${employee.employeeEmail}"></td>
+            <td th:text="${employee.employeeAddress}"></td>
+
+
+            <td th:text="${employee.position.positionName}"></td>
+            <td th:text="${employee.education.educationDegreeName}"></td>
+            <td th:text="${employee.division.divisionName}"></td>
+
+
+            <td>
+              <a th:href="@{/employee/edit/__${employee.employeeId}__}">
+                <button type="button" class="btn btn-primary">Edit</button>
+              </a>
+            </td>
+
+            <td>
+
+              <button class="btn btn-danger" data-toggle="modal" data-target="#myModal"
+                      th:data-parameter1="${employee.employeeId}"
+                      th:data-parameter2="${employee.employeeName}"
+                      onclick="showModal(this.getAttribute('data-parameter1'),this.getAttribute('data-parameter2'))">
+                Delete
+              </button>
+
+            </td>
+
+            <td>
+              <a th:href="@{/employee/view/__${employee.employeeId}__}">
+                <button type="button" class="btn btn-primary">View</button>
+              </a>
+            </td>
+
+          </tr>
+
+          </tbody>
+        </table>
+
+
+        <div>
+          <a th:href="@{'/employee'(page=${employees.number - 1},name=${searchName})}"
+             th:if="${employees.hasPrevious()}">Previous</a>
+
+          <span th:text="${employees.number+1}"></span>/<span th:text="${employees.totalPages}"></span>
+
+          <a th:href="@{'/employee'(page=${employees.number + 1},name=${searchName})}"
+             th:if="${employees.hasNext()}">Next</a>
+        </div>
+
+
+
+
+        <!--                <div>-->
+        <!--                    <a th:href="@{'/employee/list'(page=${employeeList.number - 1},name=${name})}"-->
+        <!--                       th:if="${employeeList.hasPrevious()}">Previous</a>-->
+
+        <!--                    <span th:text="${employeeList.number+1}"></span>/<span th:text="${employeeList.totalPages}"></span>-->
+
+        <!--                    <a th:href="@{'/employee/list'(page=${employeeList.number + 1},name=${name})}"-->
+        <!--                       th:if="${employeeList.hasNext()}">Next</a>-->
+        <!--                </div>-->
+
+
+
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+
+<!--sTART MODAL-->
+
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <!--        -->
+    <form th:action="@{/employee/delete}" method="post">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="myModalLabel">Accept delete </h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Do you want to delete
+          <span style="color: red" id="employeeName"></span>?
+        </div>
+        <div class="modal-footer">
+          <input type="button" class="btn btn-secondary" data-dismiss="modal" value="Cancel">
+          <input type="submit" class="btn btn-danger btn-ok" id="delete" value="Delete">
+          <!---->
+          <input type="hidden" id="employeeId" name="id">
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script type="text/javascript">
+  function showModal(id, name) {
+    document.getElementById("employeeId").value = id;
+    document.getElementById("employeeName").innerText = name;
+  }
+</script>
+
+<!--END MODAL-->
+
+<footer th:replace="homePage :: end"></footer>
