@@ -1,0 +1,74 @@
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">Student Create</h5>
+
+
+<!--    <label class="col-md-4 control-label ">Name:</label>-->
+<!--    <div class="input-group mb-2">-->
+<!--      <input type="text" class="form-control" #name>-->
+<!--    </div>-->
+
+<!--    <label class="col-md-4 control-label ">Gender</label>-->
+
+
+<!--    <div>-->
+
+<!--      <input type="radio" value="0" name="gender" #gender1>Male-->
+
+<!--      <input type="radio" value="1" name="gender" #gender2>Female-->
+
+<!--      <input type="radio" value="2" name="gender" #gender3>LGBT-->
+
+
+<!--    </div>-->
+
+<!--    <label class="col-md-4 control-label ">Point:</label>-->
+<!--    <div class="input-group mb-2">-->
+<!--      <input type="number" class="form-control" #point>-->
+<!--    </div>-->
+
+<!--    <button type="button" class="bth bg-success" (click)="createStudent(name.value,-->
+<!--    gender1.checked?gender1.value:gender2.checked ? gender2.value:gender3.checked ? gender3.value:'',-->
+<!--    point.value-->
+<!--    )">Create-->
+<!--    </button>-->
+
+
+
+
+
+    <form [formGroup]="studentForm" (ngSubmit)="createBai7()">
+
+      <label class="col-md-4 control-label ">Name:</label>
+      <div class="input-group mb-2">
+        <input type="text" class="form-control" formControlName="name">
+      </div>
+      <div style="color: red" *ngIf="studentForm.controls.name.hasError('required')&&studentForm.controls.
+      name.touched">Tên không được để trống
+<!--        name.touched">Tên không được để trống-->
+      </div>
+
+      <div style="color: red" *ngIf="studentForm.controls.name.hasError('minlength')&&studentForm.controls.
+      name.touched">Số luương kí tự phải lớn hơn 5
+      </div>
+
+
+      <label class="col-md-4 control-label ">Gender</label>
+      <div>
+        <input type="radio" value="1" formControlName="gender">Male
+        <input type="radio" value="2" formControlName="gender">Female
+        <input type="radio" value="3" formControlName="gender">LGBT
+      </div>
+
+      <label class="col-md-4 control-label ">Point:</label>
+      <div class="input-group mb-2">
+        <input type="number" class="form-control" formControlName="point">
+      </div>
+<!--ko hơp lệ thì nút màu lợt ko cho tạo-->
+          <button type="submit" class="btn bg-primary" [disabled]="studentForm.invalid">Create</button>
+
+    </form>
+
+
+  </div>
+</div>

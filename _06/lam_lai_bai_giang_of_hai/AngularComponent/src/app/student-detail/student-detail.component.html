@@ -1,0 +1,24 @@
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">Student Detail</h5>
+
+    <div *ngIf="studentDetail;else empty">
+      <div>
+        Name:{{studentDetail.name}}
+      </div>
+      <div>
+        Gender:{{studentDetail.gender}}
+      </div>
+      <div>
+        Point:{{studentDetail.point}}
+      </div>
+
+    </div>
+
+    <ng-template #empty>
+      List empty!
+    </ng-template>
+
+
+  </div>
+</div>
