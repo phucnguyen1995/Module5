@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './components/home/home/home.component';
+
 import { CreateCustomerComponent } from './components/customer/create-customer/create-customer.component';
 import { DeleteCustomerComponent } from './components/customer/delete-customer/delete-customer.component';
 import { EditCustomerComponent } from './components/customer/edit-customer/edit-customer.component';
@@ -26,11 +26,14 @@ import { ListContractComponent } from './components/contract/list-contract/list-
 import { ViewContractComponent } from './components/contract/view-contract/view-contract.component';
 import { CreateContractDetailComponent } from './components/contract-detail/create-contract-detail/create-contract-detail.component';
 import { ListContractDetailComponent } from './components/contract-detail/list-contract-detail/list-contract-detail.component';
+import { HomeComponent } from './components/home/home.component';
+
+
+// @ts-ignore
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
     CreateCustomerComponent,
     DeleteCustomerComponent,
     EditCustomerComponent,
@@ -52,11 +55,14 @@ import { ListContractDetailComponent } from './components/contract-detail/list-c
     ListContractComponent,
     ViewContractComponent,
     CreateContractDetailComponent,
-    ListContractDetailComponent
+    ListContractDetailComponent,
+    HomeComponent,
+
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]
