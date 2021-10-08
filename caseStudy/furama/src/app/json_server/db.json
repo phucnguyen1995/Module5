@@ -1,0 +1,41 @@
+{
+
+  "customerType": [
+    {
+      "id": 1,
+      "name": "Diamond"
+    },
+    {
+      "id": 2,
+      "name": "Platinum"
+    },
+    {
+      "id": 3,
+      "name": "Gold"
+    },
+    {
+      "id": 4,
+      "name": "Silver"
+    },
+    {
+      "id": 5,
+      "name": "Member"
+    }
+  ],
+
+  "customer": [
+    {
+      "id": 1,
+      "code": "KH-1234",
+      "name": "Nguyễn Khắc Phục",
+      "gender": 1,
+      "customerType":"Diamond" ,
+      "birthday": "1995-02-03",
+      "idCard": "205824557",
+      "phone": "0914054226",
+      "email": "phuckhac1995@gmail.com",
+      "address": "67 pham quang ảnh,sơn trà đà nẵng"
+
+    }
+  ]
+}
