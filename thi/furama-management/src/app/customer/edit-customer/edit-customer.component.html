@@ -1,0 +1,114 @@
+<div class="container mt-2">
+  <h2 class="text-center">Edit </h2>
+  <form [formGroup]="editForm" (ngSubmit)="editCustomer()">
+    <div class="form-group">
+
+
+
+      <label>Số xe :</label>
+      <input formControlName="code" class="form-control" type="text" name="code" aria-describedby="code" readonly>
+<!--      <p class="text-danger"-->
+<!--         *ngIf="editForm.controls.code.hasError('required')-->
+<!--         && editForm.controls.code.dirty">-->
+<!--        Please Input !!!-->
+<!--      </p>-->
+<!--      <p class="text-danger"-->
+<!--         *ngIf="editForm.controls.code.hasError('pattern')">-->
+<!--        Mã Khách hàng có định dạng là KH-XXXX (X là số từ 0-9)-->
+<!--      </p>-->
+      <label class="mt-2">Tên nhà xe :</label>
+      <input formControlName="name" class="form-control" type="text" name="name">
+      <p class="text-danger"
+         *ngIf="editForm.controls.name.hasError('required')
+         && editForm.controls.name.dirty">
+       Vui lòng không để trống !!!
+      </p>
+
+      <label for="go">Điểm đi</label>
+      <select formControlName="go" class="form-control" id="go" name="go">
+        <option value="1">Đà nẵng</option>
+        <option value="2">Quảng trị</option>
+        <option value="3">Huế</option>
+      </select>
+      <p class="text-danger"
+         *ngIf="editForm.controls.go.hasError('required')
+         && editForm.controls.go.dirty">
+      </p>
+
+      <label for="to">Điểm đến</label>
+      <select formControlName="to" class="form-control" id="to" name="to">
+        <option value="1">Đà nẵng</option>
+        <option value="2">Quảng trị</option>
+        <option value="3">Huế</option>
+      </select>
+      <p class="text-danger"
+         *ngIf="editForm.controls.to.hasError('required')
+         && editForm.controls.to.dirty">
+      </p>
+
+      <label class="mt-2">Phone :</label>
+      <input formControlName="phone" class="form-control" type="text" name="phone" aria-describedby="phone">
+      <p class="text-danger"
+         *ngIf="editForm.controls.phone.hasError('required')
+         && editForm.controls.phone.dirty">
+        Vui lòng không để trống !!!
+      </p>
+      <p class="text-danger"
+         *ngIf="editForm.controls.phone.hasError('pattern')">
+        Số điện thoại phải bắt đầu bằng 090 hoặc 093 hoặc 097 và có 10 số!!!
+      </p>
+
+
+      <label class="mt-2">Email :</label>
+      <input formControlName="email" class="form-control" type="text" name="email" aria-describedby="email">
+      <p class="text-danger"
+         *ngIf="editForm.controls.email.hasError('required')
+         && editForm.controls.email.dirty">
+        Vui lòng không để trống !!!
+      </p>
+      <p class="text-danger"
+         *ngIf="editForm.controls.email.hasError('email')">
+        Địa chỉ email phải đúng định dạng email
+      </p>
+
+      <label class="mt-2">Giờ đi:</label>
+      <input formControlName="timeGo" class="form-control" type="text" name="timeGo">
+      <p class="text-danger"
+         *ngIf="editForm.controls.timeGo.hasError('required')
+         && editForm.controls.timeGo.dirty">
+        Vui lòng không để trống !!!
+      </p>
+      <p class="text-danger"
+         *ngIf="editForm.controls.timeGo.hasError('pattern')">
+        Yêu cầu đúng định dạng hh:mm và nhỏ hơn 23 giờ!!!
+      </p>
+
+
+
+      <label class="mt-2">Giờ đến:</label>
+      <input formControlName="timeTo" class="form-control" type="text" name="timeTo">
+      <p class="text-danger"
+         *ngIf="editForm.controls.timeTo.hasError('required')
+         && editForm.controls.timeTo.dirty">
+        Vui lòng không để trống !!!
+      </p>
+      <p class="text-danger"
+         *ngIf="editForm.controls.timeTo.hasError('pattern')">
+        Yêu cầu đúng định dạng hh:mm và nhỏ hơn 23 giờ!!!
+      </p>
+
+      <label class="mt-2">Loại xe :</label>
+      <select formControlName="customerType" [compareWith]="compareFn" class="form-control" name="customerType">
+        <option *ngFor=" let customerType of customerTypes" [ngValue]="customerType">{{customerType.name}}</option>
+      </select>
+
+
+      <div class="mt-2" style="text-align: center">
+        <input class="btn btn-success" type="submit" value="Sửa"  [disabled]="editForm.invalid">|<a class="btn btn-dark" [routerLink]="'/customer-list'" role="button">Quay về</a>
+      </div>
+      <br />
+    </div>
+  </form>
+</div>
+
+

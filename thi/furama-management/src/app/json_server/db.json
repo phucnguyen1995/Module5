@@ -1,0 +1,29 @@
+{
+  "customerType": [
+    {
+      "id": 1,
+      "name": "Giường nằm"
+    },
+    {
+      "id": 2,
+      "name": "Ghế ngồi"
+    }
+  ],
+  "customer": [
+    {
+      "id": 1,
+      "code": "1234",
+      "name": "Mai Linh",
+      "go": "1",
+      "to": "2",
+      "phone": "0901234562",
+      "email": "mailinh@gmail.com",
+      "timeGo": "13:21",
+      "timeTo": "15:00",
+      "customerType": {
+        "id": 1,
+        "name": "Giường nằm"
+      }
+    }
+  ]
+}

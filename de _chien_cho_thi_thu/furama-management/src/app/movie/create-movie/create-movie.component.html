@@ -1,0 +1,71 @@
+<div class="container mt-2">
+  <h2 class="text-center">Add New Customer</h2>
+  <form [formGroup]="createForm" (ngSubmit)="createMovie()">
+    <div class="form-group">
+      <label>Code :</label>
+      <input formControlName="code" class="form-control" type="text" name="code" aria-describedby="code">
+      <p class="text-danger"
+         *ngIf="createForm.controls.code.hasError('required')
+         && createForm.controls.code.dirty">
+        Please Input !!!
+      </p>
+      <p class="text-danger"
+         *ngIf="createForm.controls.code.hasError('pattern')">
+        Mã phim phải có định dạng là CI-XXXX (X là số từ 0-9)
+      </p>
+
+      <label class="mt-2">Movie :</label>
+      <select formControlName="movie" class="form-control" name="movie">
+        <option value="" selected>--Choose Movie Type--</option>
+        <option *ngFor=" let movie of movies" [ngValue]="movie">{{movie.nameMovie}}</option>
+      </select>
+      <p class="text-danger"
+         *ngIf="createForm.controls.movie.hasError('required')
+         && createForm.controls.movie.touched">
+        Vui lòng chọn phim !!!
+      </p>
+
+
+      <label class="mt-2">Day Start :</label>
+      <input formControlName="dayStart" class="form-control" type="date" name="dayStart">
+      <p class="text-danger"
+         *ngIf="createForm.controls.dayStart.hasError('required')
+         && createForm.controls.dayStart.touched">
+        Vui lòng chọn Ngày !!!
+      </p>
+
+      <p class="text-danger"
+               *ngIf="createForm.controls.dayStart.hasError('errorTime')">
+        phải lớn hơn 18 tuổi nhé!
+<!--              Vui lòng chọn ngày sau ngày hiện tại-->
+      </p>
+
+
+      <label class="mt-2">Quantity :</label>
+      <input formControlName="quantity" class="form-control" type="text" name="quantity" aria-describedby="quantity">
+      <p class="text-danger"
+         *ngIf="createForm.controls.quantity?.hasError('required')
+         && createForm.controls.quantity.touched">
+        Vui lòng nhập !!!
+      </p>
+
+      <p class="text-danger"
+         *ngIf="createForm.controls.quantity.hasError('min')">
+        Số lượng vé là số nguyên dương!
+      </p>
+
+      <p class="text-danger"
+         *ngIf="createForm.controls.quantity.hasError('pattern')">
+        Số lượng vé phải là số nguyên
+      </p>
+
+      <div class="mt-2" style="text-align: center">
+        <input class="btn btn-success" type="submit" value="Create" [disabled]="createForm.invalid"> |
+        <a class="btn btn-dark" [routerLink]="'/movie-list'" role="button">Back</a>
+      </div>
+
+      <br/>
+    </div>
+  </form>
+</div>
+

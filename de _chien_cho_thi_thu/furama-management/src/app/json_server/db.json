@@ -1,0 +1,62 @@
+{
+  "movie": [
+    {
+      "idMovie": 1,
+      "nameMovie": "Conan"
+    },
+    {
+      "idMovie": 2,
+      "nameMovie": "Doremon"
+    },
+    {
+      "idMovie": 3,
+      "nameMovie": "Spider man"
+    },
+    {
+      "idMovie": 4,
+      "nameMovie": "Super hero"
+    }
+  ],
+  "slide": [
+    {
+      "id": 1,
+      "code": "CI-0001",
+      "movie": {
+        "idMovie": 4,
+        "nameMovie": "Super hero"
+      },
+      "dayStart": "2021-12-12",
+      "quantity": "3"
+    },
+    {
+      "code": "CI-1221",
+      "movie": {
+        "idMovie": 2,
+        "nameMovie": "Doremon"
+      },
+      "dayStart": "2021-10-13",
+      "quantity": "3",
+      "id": 5
+    },
+    {
+      "code": "CI-1234",
+      "movie": {
+        "idMovie": 4,
+        "nameMovie": "Super hero"
+      },
+      "dayStart": "2021-10-15",
+      "quantity": "5",
+      "id": 6
+    },
+    {
+      "code": "CI-1234",
+      "movie": {
+        "idMovie": 2,
+        "nameMovie": "Doremon"
+      },
+      "dayStart": "2021-10-21",
+      "quantity": 5,
+      "id": 7
+    }
+  ]
+}

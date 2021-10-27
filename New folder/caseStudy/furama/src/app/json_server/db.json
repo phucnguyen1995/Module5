@@ -1,0 +1,86 @@
+{
+  "customerType": [
+    {
+      "id": 1,
+      "name": "Diamond"
+    },
+    {
+      "id": 2,
+      "name": "Platinum"
+    },
+    {
+      "id": 3,
+      "name": "Gold"
+    },
+    {
+      "id": 4,
+      "name": "Silver"
+    },
+    {
+      "id": 5,
+      "name": "Member"
+    }
+  ],
+  "customer": [
+    {
+      "id": 1,
+      "code": "KH-1234",
+      "name": "Nguyễn Khắc Phục",
+      "gender": 1,
+      "customerType": {
+        "id": 1,
+        "name": "Diamond"
+      },
+      "birthday": "1995-02-03",
+      "idCard": "205824557",
+      "phone": "0914054226",
+      "email": "phuckhac1995@gmail.com",
+      "address": "67 pham quang ảnh,sơn trà đà nẵng"
+    },
+    {
+      "id": 2,
+      "code": "KH-1234",
+      "name": "Nguyễn Khắc Phục",
+      "gender": 1,
+      "customerType": {
+        "id": 1,
+        "name": "Diamond"
+      },
+      "birthday": "1995-02-03",
+      "idCard": "205824557",
+      "phone": "0914054226",
+      "email": "phuckhac1995@gmail.com",
+      "address": "67 pham quang ảnh,sơn trà đà nẵng"
+    },
+    {
+      "code": "KH-4567",
+      "name": "ATAI",
+      "gender": "2",
+      "customerType": {
+        "id": 3,
+        "name": "Gold"
+      },
+      "birthday": "2021-09-28",
+      "idCard": "123456789",
+      "phone": "0912113112",
+      "email": "tai@GMAIL.COM",
+      "address": "nguyễn huwux thọ",
+      "id": 3
+    },
+    {
+      "code": "KH-1234",
+      "name": "g",
+      "gender": "0",
+      "customerType": {
+        "id": 2,
+        "name": "Platinum"
+      },
+      "birthday": "2021-10-13",
+      "idCard": "123456789",
+      "phone": "0914054226",
+      "email": "phuckhac1995@gmail.com",
+      "address": "da nang",
+      "id": 4
+    }
+  ]
+}

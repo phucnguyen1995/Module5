@@ -1,0 +1,368 @@
+<!--<div class="container-fluid bg-light border ">-->
+<!--  <div class="row">-->
+
+<!--    <div class="col-lg-12 pt-3 pb-3">-->
+<!--      <div class="row" style="margin-bottom: 10px">-->
+
+<!--        <div class="col-lg-12">-->
+<!--          <h1 style="text-align: center">List</h1>-->
+<!--        </div>-->
+
+<!--        <div class="col-lg-7">-->
+
+<!--          <div style=" display:inline-block;width:50%;float: left ; margin-left: 110px;" ;>-->
+<!--            &lt;!&ndash;            <a   [routerLink]="'/customer-create'">&ndash;&gt;-->
+<!--            <button type="button" class="btn btn-success">Add Create</button>-->
+<!--            &lt;!&ndash;            </a>&ndash;&gt;-->
+<!--          </div>-->
+<!--        </div>-->
+
+<!--        <div class="col-lg-5">-->
+<!--          <div style=" display:inline-block">-->
+<!--            <form action="/customer" class="form-inline my-2 my-lg-0">-->
+<!--              &lt;!&ndash;              <input th:value="${searchName}" class="form-control mr-sm-2" type="search"&ndash;&gt;-->
+<!--              placeholder="customerName" aria-label="Search" name="name">-->
+
+
+<!--              <select class="form-control mr-sm-2" name="typeCustomer">-->
+<!--                <option selected disabled value="">searchTypeCustomer</option>-->
+<!--                <option value="Diamond">Diamond</option>-->
+<!--                <option value="Platinum">Platinum</option>-->
+<!--                <option value="Gold">Gold</option>-->
+<!--                <option value="Silver">Silver</option>-->
+<!--                <option value="Member">Member</option>-->
+<!--              </select>-->
+
+
+<!--              &lt;!&ndash;              <select class="form-control mr-sm-2" name="typeCustomer">&ndash;&gt;-->
+<!--              &lt;!&ndash;                <option selected value="">All position</option>&ndash;&gt;-->
+<!--              &lt;!&ndash;                <th:block th:each="p : ${customerList}">&ndash;&gt;-->
+<!--              &lt;!&ndash;                  <option th:value="${p.customerTypeName}" th:text="${p.customerTypeName}"&ndash;&gt;-->
+<!--              &lt;!&ndash;                          th:selected=" ${p.customerTypeName} == ${typeName}">&ndash;&gt;-->
+<!--              &lt;!&ndash;                  </option>&ndash;&gt;-->
+<!--              &lt;!&ndash;                </th:block>&ndash;&gt;-->
+<!--              &lt;!&ndash;              </select>&ndash;&gt;-->
+
+
+<!--              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
+<!--            </form>-->
+<!--          </div>-->
+<!--        </div>-->
+
+<!--        &lt;!&ndash;        <div class="col-lg-12">&ndash;&gt;-->
+<!--        &lt;!&ndash;          <div th:align="center">&ndash;&gt;-->
+<!--        &lt;!&ndash;            <span th:if="${message}" th:text="${message}" style="color: red"></span>&ndash;&gt;-->
+<!--        &lt;!&ndash;          </div>&ndash;&gt;-->
+<!--        &lt;!&ndash;        </div>&ndash;&gt;-->
+
+<!--      </div>-->
+
+<!--      <div class="row">-->
+<!--        <table class="table table-striped">-->
+<!--          <thead>-->
+<!--          <tr class="table-success">-->
+
+
+<!--            &lt;!&ndash;            id: number;&ndash;&gt;-->
+<!--            &lt;!&ndash;            code: string;&ndash;&gt;-->
+<!--            &lt;!&ndash;            name: string;&ndash;&gt;-->
+<!--            &lt;!&ndash;            gender: number;&ndash;&gt;-->
+<!--            &lt;!&ndash;            customerType: CustomerType;&ndash;&gt;-->
+<!--            &lt;!&ndash;            birthday: string;&ndash;&gt;-->
+<!--            &lt;!&ndash;            idCard: string;&ndash;&gt;-->
+<!--            &lt;!&ndash;            phone: string;&ndash;&gt;-->
+<!--            &lt;!&ndash;            email: string;&ndash;&gt;-->
+<!--            &lt;!&ndash;            address: string;&ndash;&gt;-->
+
+<!--            <th scope="col">#</th>-->
+<!--            <th scope="col">Id</th>-->
+<!--            <th scope="col">Code</th>-->
+
+<!--            <th scope="col">Name</th>-->
+<!--            <th scope="col">Birthday</th>-->
+<!--            <th scope="col">Gender</th>-->
+<!--            <th scope="col">IdCard</th>-->
+<!--            <th scope="col">Phone</th>-->
+<!--            <th scope="col">Email</th>-->
+<!--            <th scope="col">Address</th>-->
+<!--            <th scope="col">Type</th>-->
+
+<!--            <th scope="col">Edit</th>-->
+<!--            <th scope="col">Delete</th>-->
+<!--            <th scope="col">View</th>-->
+
+<!--          </tr>-->
+<!--          </thead>-->
+
+<!--          <tbody>-->
+<!--          <tr *ngFor="let customer of customers | paginate: {itemsPerPage: 1, currentPage: page }; index as i">-->
+
+<!--            <td>{{i + 1}}</td>-->
+<!--            <td>{{customer.id}}</td>-->
+<!--            <td>{{customer.code}}</td>-->
+<!--            <td>{{customer.name}}</td>-->
+<!--            <td>{{customer.birthday}}</td>-->
+
+<!--            <td [ngSwitch]="customer.gender">-->
+<!--              <span *ngSwitchCase="0">Female</span>-->
+<!--              <span *ngSwitchCase="1">Male</span>-->
+<!--              <span *ngSwitchDefault>LGBT</span>-->
+<!--            </td>-->
+
+<!--            <td>{{customer.idCard}}</td>-->
+<!--            <td>{{customer.phone}}</td>-->
+<!--            <td>{{customer.email}}</td>-->
+<!--            <td>{{customer.address}}</td>-->
+<!--            <td>{{customer.customerType.name}}</td>-->
+
+
+<!--            <td>-->
+<!--              <a>-->
+<!--                &lt;!&ndash;                th:href="@{/customer/edit/__${customer.customerId}__}"&ndash;&gt;-->
+<!--                <button type="button" class="btn btn-primary">Edit</button>-->
+<!--              </a>-->
+<!--            </td>-->
+
+<!--            <td>-->
+<!--              <button class="btn btn-danger" data-toggle="modal" data-target="#myModal">-->
+<!--                &lt;!&ndash;                      th:data-parameter1="${customer.customerId}"&ndash;&gt;-->
+<!--                &lt;!&ndash;                      th:data-parameter2="${customer.customerName}"&ndash;&gt;-->
+<!--                &lt;!&ndash;                      onclick="showModal(this.getAttribute('data-parameter1'),this.getAttribute('data-parameter2'))">&ndash;&gt;-->
+<!--                Delete-->
+<!--              </button>-->
+<!--            </td>-->
+
+<!--            <td>-->
+<!--              <a>-->
+<!--                &lt;!&ndash;              <a th:href="@{/customer/view/__${customer.customerId}__}">&ndash;&gt;-->
+<!--                <button type="button" class="btn btn-primary">View</button>-->
+<!--              </a>-->
+<!--            </td>-->
+
+<!--          </tr>-->
+<!--          </tbody>-->
+<!--        </table>-->
+
+<!--        <pagination-controls (pageChange)="page = $event"></pagination-controls>-->
+
+
+<!--      </div>-->
+
+<!--    </div>-->
+
+<!--  </div>-->
+<!--</div>-->
+
+
+<!--<div class="container-fluid mt-3">-->
+<!--  <h1 class="text-center">Customer List</h1>-->
+
+<!--  <nav class="navbar navbar-expand-lg navbar-light">-->
+<!--    <div class="container-fluid">-->
+<!--      <div class="collapse navbar-collapse" id="navbarSupportedContent>-->
+
+<!--      <a class="navbar-brand btn btn-primary mb-2 text-white" [routerLink]="'/customer-create'" role="button"> + Create-->
+<!--        Customer</a>-->
+<!--    </div>-->
+
+<!--    <div class="d-flex justify-content-end">-->
+<!--      &lt;!&ndash;      <select [(ngModel)]="customerTypeName" class="form-control">&ndash;&gt;-->
+<!--      &lt;!&ndash;        <option value="">&#45;&#45;Choose Customer Type&#45;&#45;</option>&ndash;&gt;-->
+<!--      &lt;!&ndash;        <option *ngFor=" let customerType of customerTypes" [ngValue]="customerType.name">{{customerType.name}}</option>&ndash;&gt;-->
+<!--      &lt;!&ndash;      </select>&ndash;&gt;-->
+
+<!--      &lt;!&ndash;      <input [(ngModel)]="term" class="form-control mx-2" type="search" placeholder="Search"&ndash;&gt;-->
+<!--      &lt;!&ndash;             aria-label="Search" name="employee">&ndash;&gt;-->
+<!--      <button class="btn btn-info text-white" type="button" (click)="searchCustomer()">-->
+<!--        <ul class="navbar-nav">-->
+<!--          <li class="nav-item">-->
+<!--            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="14" fill="currentColor"-->
+<!--                 class="bi bi-search" viewBox="0 0 16 16">-->
+<!--              <path-->
+<!--                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>-->
+<!--            </svg>-->
+<!--          </li>-->
+<!--          <li class="nav-item px-1">-->
+<!--            Search-->
+<!--          </li>-->
+<!--        </ul>-->
+<!--      </button>-->
+<!--    </div>-->
+
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+<!--&lt;!&ndash;</nav>&ndash;&gt;-->
+
+<!--<div class="container-fluid ">-->
+<!--  <table id="tableCustomer" class="table table-bordered table-striped table-responsive mw-100">-->
+<!--    <thead>-->
+<!--    <tr>-->
+<!--      <th class="align-middle">No</th>-->
+<!--      <th class="align-middle">Id</th>-->
+<!--      <th class="align-middle">Code</th>-->
+<!--      <th class="align-middle">Name</th>-->
+<!--      <th class="align-middle">Birthday</th>-->
+<!--      <th class="align-middle">gender</th>-->
+<!--      <th class="align-middle">Id Card</th>-->
+<!--      <th class="align-middle">Phone</th>-->
+<!--      <th class="align-middle">Email</th>-->
+<!--      <th class="align-middle">Address</th>-->
+<!--      <th class="align-middle">Type</th>-->
+<!--      <th class="align-middle text-center">Delete</th>-->
+<!--      <th class="align-middle text-center">Edit</th>-->
+<!--    </tr>-->
+<!--    </thead>-->
+
+<!--    <tbody>-->
+<!--    <tr *ngFor="let customer of customers | paginate: {itemsPerPage: 1, currentPage: page }; index as i">-->
+
+
+<!--      <td>{{i + 1}}</td>-->
+<!--      <td>{{customer.id}}</td>-->
+<!--      <td>{{customer.code}}</td>-->
+<!--      <td>{{customer.name}}</td>-->
+<!--      <td>{{customer.birthday}}</td>-->
+
+<!--      <td [ngSwitch]="customer.gender">-->
+<!--        <span *ngSwitchCase="0">Female</span>-->
+<!--        <span *ngSwitchCase="1">Male</span>-->
+<!--        <span *ngSwitchDefault>LGBT</span>-->
+<!--      </td>-->
+
+
+<!--      <td>{{customer.idCard}}</td>-->
+<!--      <td>{{customer.phone}}</td>-->
+<!--      <td>{{customer.email}}</td>-->
+<!--      <td>{{customer.address}}</td>-->
+<!--      <td>{{customer.customerType.name}}</td>-->
+
+<!--      <td class="align-middle">-->
+<!--        <button type="button" class="btn btn-danger">-->
+<!--          &lt;!&ndash;                  (click)="openDialog(customer.id)">&ndash;&gt;-->
+<!--          Delete-->
+<!--        </button>-->
+<!--      </td>-->
+
+<!--      <td>-->
+<!--        &lt;!&ndash;          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal"&ndash;&gt;-->
+<!--        &lt;!&ndash;                  [routerLink]="['/customer-edit', customer.id]">&ndash;&gt;-->
+<!--        &lt;!&ndash;            Edit&ndash;&gt;-->
+<!--        &lt;!&ndash;          </button>&ndash;&gt;-->
+<!--      </td>-->
+<!--    </tr>-->
+<!--    </tbody>-->
+<!--  </table>-->
+<!--  <pagination-controls (pageChange)="page = $event"></pagination-controls>-->
+<!--</div>-->
+<!--</div>-->
+
+
+<div class="container-fluid mt-3">
+  <h1 class="text-center">Customer List</h1>
+
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container-fluid">
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="col-lg-4">
+          <div class="navbar-nav me-auto mb-2 mb-lg-0">
+            <a class="navbar-brand btn btn-primary mb-2 text-white" [routerLink]="'/customer-create'"role="button">Create Customer</a>
+          </div>
+        </div>
+
+        <div class="col-lg-8">
+          <div class="d-flex justify-content-end">
+            <select [(ngModel)]="customerTypeName" class="form-control">
+              <option value="">--Choose Customer Type--</option>
+              <option *ngFor=" let customerType of customerTypes"
+                      [ngValue]="customerType.name">{{customerType.name}}</option>
+            </select>
+
+            <input [(ngModel)]="term" class="form-control mx-2" type="search" placeholder="Search"
+                   aria-label="Search" name="customer">
+
+            <button class="btn btn-primary" type="button" (click)="searchCustomer()">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="14" fill="currentColor"
+                       class="bi bi-search" viewBox="0 0 16 16">
+                    <path
+                      d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                  </svg>
+                </li>
+                <li class="nav-item px-1">
+                  Search
+                </li>
+              </ul>
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </nav>
+
+  <div class="container-fluid">
+    <table id="tableCustomer" class="table table-bordered table-striped">
+      <thead>
+      <tr>
+        <!--        <th class="align-middle">#</th>-->
+        <th class="align-middle">Id</th>
+        <th class="align-middle">Code</th>
+        <th class="align-middle">Name</th>
+        <th class="align-middle">Birthday</th>
+        <th class="align-middle">gender</th>
+        <th class="align-middle">Id Card</th>
+        <th class="align-middle">Phone</th>
+        <th class="align-middle">Email</th>
+        <th class="align-middle">Address</th>
+        <th class="align-middle">Type</th>
+
+        <th class="align-middle text-center">Delete</th>
+        <th class="align-middle text-center">Edit</th>
+        <th class="align-middle text-center">View</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <tr *ngFor="let customer of customers | filter: term | paginate: {itemsPerPage: 1, currentPage: page }; index as i">
+        <!--        <td>{{i + 1}}</td>-->
+        <td>{{customer.id}}</td>
+        <td>{{customer.code}}</td>
+        <td>{{customer.name}}</td>
+        <td>{{customer.birthday}}</td>
+
+        <td [ngSwitch]="customer.gender">
+          <span *ngSwitchCase="0">Female</span>
+          <span *ngSwitchCase="1">Male</span>
+          <span *ngSwitchDefault>LGBT</span>
+        </td>
+
+        <td>{{customer.idCard}}</td>
+        <td>{{customer.phone}}</td>
+        <td>{{customer.email}}</td>
+        <td>{{customer.address}}</td>
+        <td>{{customer.customerType.name}}</td>
+
+        <td>
+          <button type="button" class="btn btn-danger" (click)="openDialog(customer.id)">Delete</button>
+        </td>
+<!--        <td><a [routerLink]="['/student-delete',customer.id]" style="color: white" class="btn bg-primary" role="button" data-toggle="modal" data-target="#modelId">Delete</a></td>-->
+        <td>
+          <button type="button" class="btn btn-primary"
+                  data-toggle="modal" data-target="#exampleModal">
+            <!--                  [routerLink]="['/customer-edit', customer.id]">-->
+            Edit
+          </button>
+        </td>
+
+        <td>
+          <button type="button" class="btn btn-primary">View</button>
+        </td>
+
+      </tr>
+      </tbody>
+    </table>
+    <pagination-controls (pageChange)="page = $event"></pagination-controls>
+  </div>
+</div>

@@ -1,0 +1,60 @@
+<div class="container-fluid mt-3">
+  <h1 class="text-center">Movie List</h1>
+
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container-fluid">
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav me-auto mb-2 mb-lg-0">
+          <a class="navbar-brand btn btn-primary mb-2 text-white" [routerLink]="'/movie-create'" role="button"> Create
+            Movie</a>
+        </div>
+
+      </div>
+    </div>
+  </nav>
+
+  <div class="container-fluid ">
+    <table id="tableCustomer" class="table table-bordered table-striped table-responsive mw-100">
+      <thead>
+      <tr>
+        <th class="align-middle">#</th>
+        <th class="align-middle">Id</th>
+        <th class="align-middle">Code</th>
+
+        <th class="align-middle">Day Start</th>
+
+        <th class="align-middle">Quantity</th>
+
+        <th class="align-middle">Type Movie</th>
+        <th class="align-middle text-center">Delete</th>
+
+      </tr>
+      </thead>
+
+      <tbody>
+      <tr *ngFor="let slide of slides  | paginate: {itemsPerPage: 3, currentPage: page }; index as i">
+        <td>{{i + 1}}</td>
+        <td>{{slide.id}}</td>
+        <td>{{slide.code}}</td>
+
+        <td>{{slide.dayStart}}</td>
+
+        <td>{{slide.quantity}}</td>
+
+        <td>{{slide.movie.nameMovie}}</td>
+
+        <td class="align-middle">
+          <button type="button" class="btn btn-danger"
+                  (click)="openDialog(slide.id)">
+            Delete
+          </button>
+        </td>
+
+      </tr>
+      </tbody>
+    </table>
+    <pagination-controls (pageChange)="page = $event"></pagination-controls>
+  </div>
+</div>
+
+
